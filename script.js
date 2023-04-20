@@ -1,4 +1,3 @@
-//
 // Ik hou van programmeren. Programmeren is leuk.
 // Ik kan veel dingen maken met programmeren. Ik kan een website maken.
 //     Ik kan een spel maken. Ik kan een chatbot maken.
@@ -20,13 +19,6 @@ const ALLOWED_IN_SENTENCE = "?!."
 
 let avi_file = {"characters": 0, "words": 0, "sentences": 0, "avi": 0}
 let avi_text = {"characters": 0, "words": 0, "sentences": 0, "avi": 0}
-
-    let amount_of_words_file = 0
-let avi_score_file = 0
-
-let amount_of_words_text = 0
-let avi_score_text = 0
-
 
 function previewFile() {
     const content = document.querySelector(".content");
@@ -78,7 +70,6 @@ function getNumberOfWords(text){
     for (let character in text){
         console.log(text[character])
         if (!ALLOWED_IN_WORD.includes(text[character])){
-            console.log("Test")
             if (lettersInWord >= 2) {
                 amountOfWords++
             }
