@@ -20,17 +20,12 @@ const ALLOWED_IN_SENTENCE = "?!."
 
 const TEST_SENTENCE = "Enige regels code veranderen een stuk metaal in een vernuftig rekenwonder."
 
-let amount_of_words = 0
-let avi_score = 0
+let amount_of_words_file = 0
+let avi_score_file = 0
 
+let amount_of_words_text = 0
+let avi_score_text = 0
 
-function getText(choice){
-    if (choice === "easy"){
-        return EASY_TEXT
-    } else if (choice === "difficult"){
-        return DIFFICULT_TEXT
-    } else console.log("test")
-}
 
 function previewFile() {
     const content = document.querySelector(".content");
@@ -41,9 +36,9 @@ function previewFile() {
         "load",
         () => {
             content.innerText = reader.result;
-            amount_of_words = getNumberOfWords(content.innerText)
-            avi_score = aviCalculator(content.innerText)
-            console.log(amount_of_words)
+            amount_of_words_file = getNumberOfWords(content.innerText)
+            avi_score_file = aviCalculator(content.innerText)
+            console.log(amount_of_words_file)
         },
         false
     );
@@ -73,7 +68,6 @@ function getNumberOfSentences(text){
     return sentenceAmount
 }
 
-
 function getNumberOfWords(text){
     let amountOfWords = 0
     let lettersInWord = 0
@@ -90,11 +84,6 @@ function getNumberOfWords(text){
         }
     }
     return amountOfWords
-}
-
-function wordAmountButton(){
-    document.getElementById("wordButton").innerHTML = "amount of words: " + amount_of_words +", " +"avi score: " + avi_score
-
 }
 
 function aviCalculator (text){
@@ -115,6 +104,15 @@ function aviCalculator (text){
         avi =  11
     } else avi = 12
 
-    avi_score = avi
+    return avi
 }
 
+function wordAmountButton(){
+    document.getElementById("calculateWordButton").innerHTML = "amount of words: " + amount_of_words_file +", " +"avi score: " + avi_score_file
+}
+
+function inputTextButton(){
+    amount_of_words_text = getNumberOfWords(document.getElementById("textInput").value)
+    avi_score_text = aviCalculator(document.getElementById("textInput").value)
+    document.getElementById("calculateTextInput").innerHTML = "amount of words: " + amount_of_words_text +", " +"avi score: " + avi_score_text
+}

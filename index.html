@@ -7,10 +7,14 @@
 </head>
 <body>
 
-<input type="file" onchange="previewFile()" /><br />
+<input type="file" onchange="previewFile()">
+<br>
 <p class="content" id="content"></p>
 <br>
-<button id="wordButton" onclick="wordAmountButton()">Bereken score</button>
+<input id="textInput" type="text">
+<br>
+<button id="calculateWordButton" onclick="wordAmountButton()">Bereken score file</button>
+<button id="calculateTextInput" onclick="inputTextButton()">Bereken score input field</button>
 
 <script src="script.js"></script>
 </body>
