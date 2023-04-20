@@ -1,26 +1,27 @@
-const EASY_TEXT = `
-Ik hou van programmeren. Programmeren is leuk.
-Ik kan veel dingen maken met programmeren. Ik kan een website maken.
-    Ik kan een spel maken. Ik kan een chatbot maken.
-    Programmeren is niet moeilijk. Ik moet alleen de juiste code schrijven.
-    De code moet logisch zijn. De code moet foutloos zijn. Werkende code maakt mij blij.
-    Niet-werkende code chagerijnig. Programmeren is een avontuur. Ik leer elke dag iets nieuws met programmeren.
-    `
-const DIFFICULT_TEXT = `Programmeren is een geweldige activiteit, die je in staat stelt om je creativiteit,
-logica en probleemoplossend vermogen te gebruiken, om allerlei soorten applicaties te maken,
-    die nuttig, vermakelijk of zelfs levensveranderend kunnen zijn, afhankelijk van je doel en publiek.
-    Het is ook een uitdagende bezigheid, die je voortdurend leert om nieuwe talen, technieken en concepten te leren,
-    die je helpen om je code efficiënter, eleganter en robuuster te maken, zonder dat je je ooit hoeft te vervelen of te herhalen.
-    Bovendien is het een leuke hobby, die je veel voldoening en plezier kan geven, als je ziet hoe je ideeën tot leven komen op het scherm, als je de interactie met je gebruikers ziet of
-als je de reacties van je vrienden en familie ziet, als je ze verrast met je eigen creaties.
-`
+//
+// Ik hou van programmeren. Programmeren is leuk.
+// Ik kan veel dingen maken met programmeren. Ik kan een website maken.
+//     Ik kan een spel maken. Ik kan een chatbot maken.
+//     Programmeren is niet moeilijk. Ik moet alleen de juiste code schrijven.
+//     De code moet logisch zijn. De code moet foutloos zijn. Werkende code maakt mij blij.
+//     Niet-werkende code chagerijnig. Programmeren is een avontuur. Ik leer elke dag iets nieuws met programmeren.
+
+// Programmeren is een geweldige activiteit, die je in staat stelt om je creativiteit,
+// logica en probleemoplossend vermogen te gebruiken, om allerlei soorten applicaties te maken,
+//     die nuttig, vermakelijk of zelfs levensveranderend kunnen zijn, afhankelijk van je doel en publiek.
+//     Het is ook een uitdagende bezigheid, die je voortdurend leert om nieuwe talen, technieken en concepten te leren,
+//     die je helpen om je code efficiënter, eleganter en robuuster te maken, zonder dat je je ooit hoeft te vervelen of te herhalen.
+//     Bovendien is het een leuke hobby, die je veel voldoening en plezier kan geven, als je ziet hoe je ideeën tot leven komen op het scherm, als je de interactie met je gebruikers ziet of
+// als je de reacties van je vrienden en familie ziet, als je ze verrast met je eigen creaties.
+
 const ALLOWED_IN_WORD = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-"
 
 const ALLOWED_IN_SENTENCE = "?!."
 
-const TEST_SENTENCE = "Enige regels code veranderen een stuk metaal in een vernuftig rekenwonder."
+let avi_file = {"characters": 0, "words": 0, "sentences": 0, "avi": 0}
+let avi_text = {"characters": 0, "words": 0, "sentences": 0, "avi": 0}
 
-let amount_of_words_file = 0
+    let amount_of_words_file = 0
 let avi_score_file = 0
 
 let amount_of_words_text = 0
@@ -36,9 +37,12 @@ function previewFile() {
         "load",
         () => {
             content.innerText = reader.result;
-            amount_of_words_file = getNumberOfWords(content.innerText)
-            avi_score_file = aviCalculator(content.innerText)
-            console.log(amount_of_words_file)
+
+            avi_file["characters"] = getNumberOfCharacters(content.innerText)
+            avi_file["words"] = getNumberOfWords(content.innerText)
+            avi_file["sentences"] = getNumberOfSentences(content.innerText)
+            avi_file["avi"] = aviCalculator(content.innerText)
+            console.log(avi_file)
         },
         false
     );
@@ -108,11 +112,15 @@ function aviCalculator (text){
 }
 
 function wordAmountButton(){
-    document.getElementById("calculateWordButton").innerHTML = "amount of words: " + amount_of_words_file +", " +"avi score: " + avi_score_file
+    document.getElementById("calculateWordButton").innerHTML = "characters: " + avi_file["characters"] + ", " + "words: " + avi_file["words"] + ", " + "sentences: " + avi_file["sentences"] + ", " + "avi score: " + avi_file["avi"]
 }
 
 function inputTextButton(){
-    amount_of_words_text = getNumberOfWords(document.getElementById("textInput").value)
-    avi_score_text = aviCalculator(document.getElementById("textInput").value)
-    document.getElementById("calculateTextInput").innerHTML = "amount of words: " + amount_of_words_text +", " +"avi score: " + avi_score_text
+    let text = document.getElementById("textInput").value
+    avi_text["characters"] = getNumberOfCharacters(text)
+    avi_text["words"] = getNumberOfWords(text)
+    avi_text["sentences"] = getNumberOfSentences(text)
+    avi_text["avi"] = aviCalculator(text)
+
+    document.getElementById("calculateTextInput").innerHTML = "characters: " + avi_text["characters"] + ", " + "words: " + avi_text["words"] + ", " + "sentences: " + avi_text["sentences"] + ", " + "avi score: " + avi_text["avi"]
 }
